@@ -46,7 +46,7 @@ fn find_repetition_start(s: &str) -> Option<usize> {
 
 
 fn main() {
-    let sqrt2 = 1.1; // sqrt(2)
+    let sqrt2 = 1.414; // sqrt(2)
     let k = 100000; 
     let bits = 16;
     let mut full_binary = String::new();
