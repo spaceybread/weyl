@@ -1,66 +1,28 @@
-use std::collections::HashMap;
-use std::f64;
+// #![feature(f128)]
+use std::collections::HashSet;
 
-fn fractional_part(x: f64) -> f64 {
+fn mod_1(x: f64) -> f64 {
     x - x.floor()
 }
 
-fn to_binary_string(mut x: f64, bits: usize) -> String {
-    let mut binary = String::new();
-    for _ in 0..bits {
-        x *= 2.0;
-        if x >= 1.0 {
-            binary.push('1');
-            x -= 1.0;
-        } else {
-            binary.push('0');
-        }
-    }
-    binary
-}
+fn repeat(x: f64) -> f64 {
+    let a = x; 
+    let mut i = 1.0; 
+    let mut seen = HashSet::new();
 
-fn find_repetition(binary: &str) -> Option<usize> {
-    let mut seen = HashMap::new();
-    for (i, window) in binary.chars().enumerate() {
-        if let Some(&first_occurrence) = seen.get(&window) {
-            return Some(i - first_occurrence);
-        }
-        seen.insert(window, i);
+    let mut t = mod_1(a * i);
+    
+    while !seen.contains(&t.to_string()) {
+        seen.insert(t.to_string()); 
+        i += 1.0;
+        t = mod_1(a * i);
     }
-    None
+    i
 }
-
-fn find_repetition_start(s: &str) -> Option<usize> {
-    let chars: Vec<char> = s.chars().collect();
-    let len = chars.len();
-    for i in 1..=len / 2 {
-        if len % i == 0 {
-            let pattern = &chars[..i];
-            if chars.chunks(i).all(|chunk| chunk == pattern) {
-                return Some(i);
-            }
-        }
-    }
-    None
-}
-
 
 fn main() {
-    let sqrt2 = 1.414; // sqrt(2)
-    let k = 100000; 
-    let bits = 16;
-    let mut full_binary = String::new();
-
-    for i in 1..=k {
-        let value = sqrt2 * (i as f64);
-        let frac_part = fractional_part(value);
-        let binary_rep = to_binary_string(frac_part, bits);
-        full_binary.push_str(&binary_rep);
-    }
-    // println!("{:?}", full_binary);
-    match find_repetition_start(&full_binary) {
-        Some(pos) => println!("String repeats after {} characters", pos),
-        None => println!("No repetition found"),
-    }
+    let x = 3.1415926535897;
+    println!("{:?}", mod_1(x));
+    println!("{:?}", repeat(x));
 
 }

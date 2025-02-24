@@ -1,3 +1,4 @@
+#![feature(collections)]
 [package]
 name = "weyl"
 version = "0.1.0"
