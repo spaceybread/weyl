@@ -23,7 +23,7 @@ while True:
     a, b = min(x, y), max(x, y)
 
     ps = list(primerange(a, b + 1))
-    ps = filter(ps, 1)
+    ps = filter(ps, 5)
 
     if len(ps) < 2: continue
     pr = prod(ps)
@@ -41,7 +41,7 @@ while True:
     al = rt - phi
     be = rt + phi
     
-    print(rt, phi, min(ps), al, max(ps), be, bits(pr), bits(al), bits(be))
+    print(rt, phi, min(ps), al, max(ps), be, bits(pr), bits(be - al))
     if min(ps) <= al or max(ps) >= be:
         print("fail")
         print(ps)
