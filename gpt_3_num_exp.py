@@ -38,10 +38,10 @@ def find_min_d0(M, C2, B, tol=1e-6):
     return (low + high) / 2
 
 LIMIT = 100000
-X = 150
+X = 300
 C2 = 1.32
 k = 2 * X
-epsilon = 0.01 / X
+epsilon = (1e-7) / X
 TRIALS = 10000
 
 failures = 0
